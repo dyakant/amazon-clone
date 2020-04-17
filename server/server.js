@@ -28,25 +28,10 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-app.get('/', (req, res) => {
-    res.json("Hello amazone clone");
-});
+// require routes
+const productRoutes = require('./routes/product');
 
-app.post('/', (req, res) => {
-    let user = new User();
-
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
-
-    user.save(err => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json("Successfully saved");
-        }
-    })
-});
+app.use('/api', productRoutes);
 
 app.listen(3000, (err) => {
     if (err) {
