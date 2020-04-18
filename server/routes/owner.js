@@ -1,18 +1,21 @@
 const router = require("express").Router();
-const Category = require("../modules/category");
+const Owner = require("../modules/owner");
+const upload = require("../middlewares/upload-photo");
 
 // POST request - create a new category
-router.post('/categories', async (req, res) => {
+router.post('/owners', upload.single("photo"), async (req, res) => {
     try {
-        let category = new Category();
+        let owner = new Owner();
 
-        category.type = req.body.type;
+        owner.name = req.body.name;
+        owner.about = req.body.about;
+        owner.photo = req.file.location;
 
-        await category.save();
+        await owner.save();
 
         res.json({
             success: true,
-            message: "Category was succesfully saved"
+            message: "Owner was succesfully saved"
         });
     } catch (err) {
         res.status(500).json({
@@ -23,13 +26,13 @@ router.post('/categories', async (req, res) => {
 });
 
 // GET request
-router.get('/categories', async (req, rep) => {
+router.get('/owners', async (req, rep) => {
     try {
-        let category = await Category.find();
+        let owner = await Owner.find();
 
         rep.json({
             success: true,
-            category: category
+            owner: owner
         });
 
     } catch (error) {
