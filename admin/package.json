@@ -10,6 +10,12 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
+  "config": {
+    "nuxt": {
+      "host": "localhost",
+      "port": "3333"
+    }
+  },
   "dependencies": {
     "nuxt": "^2.0.0",
     "bootstrap-vue": "^2.0.0",
