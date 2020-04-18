@@ -94,9 +94,34 @@ router.put('/products/:id', upload.single("photo"), async (req, rep) => {
             success: false,
             message: error.message
         });
-    }
+    };
 });
 
 // DELETE request - delete a single product
+router.delete('/products/:id', async (req, res) => {
+    try {
+        let deletedProduct = await Product.findOneAndDelete({
+            _id: req.params.id
+        });
+
+        if (deletedProduct) {
+            res.json({
+                success: true,
+                deletedProduct: deletedProduct,
+                message: "Successfully deleted"
+            });
+        } else {
+            res.json({
+                success: true,
+                message: "Product was not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    };
+});
 
 module.exports = router;
