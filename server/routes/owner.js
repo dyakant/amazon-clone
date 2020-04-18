@@ -17,10 +17,10 @@ router.post('/owners', upload.single("photo"), async (req, res) => {
             success: true,
             message: "Owner was succesfully saved"
         });
-    } catch (err) {
+    } catch (error) {
         res.status(500).json({
             success: false,
-            message: err.message
+            message: error.message
         });
     };
 });
@@ -38,7 +38,7 @@ router.get('/owners', async (req, rep) => {
     } catch (error) {
         rep.status(500).json({
             success: false,
-            message: err.message
+            message: error.message
         });
     }
 });

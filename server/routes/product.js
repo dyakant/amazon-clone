@@ -4,7 +4,7 @@ const upload = require("../middlewares/upload-photo");
 
 // POST request - create a new product
 // 
-router.post('/products',  upload.single("photo"), async (req, res) => {
+router.post('/products', upload.single("photo"), async (req, res) => {
     try {
         let product = new Product();
         product.title = req.body.title;
@@ -40,7 +40,7 @@ router.get('/products', async (req, rep) => {
     } catch (error) {
         rep.status(500).json({
             success: false,
-            message: err.message
+            message: error.message
         });
     }
 });
@@ -48,7 +48,9 @@ router.get('/products', async (req, rep) => {
 // GET request - request a single product
 router.get('/products/:id', async (req, rep) => {
     try {
-        let product = await Product.findOne({ _id: req.params.id });
+        let product = await Product.findOne({
+            _id: req.params.id
+        });
 
         rep.json({
             success: true,
@@ -58,13 +60,42 @@ router.get('/products/:id', async (req, rep) => {
     } catch (error) {
         rep.status(500).json({
             success: false,
-            message: err.message
+            message: error.message
         });
     }
-}); 
+});
 
 // PUT request - update a single product
+router.put('/products/:id', upload.single("photo"), async (req, rep) => {
+    try {
+        let product = await Product.findOneAndUpdate({
+            _id: req.params.id
+        }, {
+            $set: {
+                title: req.body.title,
+                description: req.body.description,
+                photo: req.file.location,
+                price: req.body.price,
+                stockQuantity: req.body.stockQuantity,
+                category: req.body.category,
+                owner: req.body.owner
+            }
+        }, {
+            upsert: true
+        });
 
+        rep.json({
+            success: true,
+            updatedProduct: product
+        });
+
+    } catch (error) {
+        rep.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+});
 
 // DELETE request - delete a single product
 
