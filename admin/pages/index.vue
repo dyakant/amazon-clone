@@ -19,7 +19,7 @@
           <div class="history-box">
             <!-- Product image -->
             <a href="#" class="a-link-normal">
-              <img src="#" alt="" class="img-fluid">
+              <img src="#" alt="Here should be a Product image" class="img-fluid">
             </a>
             <div class="a-spacing-top-base asin-title">
               <span class="a-text normal">
@@ -27,7 +27,7 @@
               </span>
             </div>
             <!-- Product rating -->
-            <dic class="a-row">
+            <div class="a-row">
               <a href="#">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -37,7 +37,7 @@
               </a>
               <span class="a-letter-space"></span>
               <span class="a-color-tertiary a-size-small asin-reviews">(12345)</span>
-            </dic>
+            </div>
             <!-- Product price -->
             <div class="a-row">
               <span class="a-size-base a-color-price">
@@ -57,6 +57,23 @@
 </template>
 
 <script>
+  export default {
+    // asyncData is fetching data before NUXT page  finished loading on the browser
+    // It's good for SEO because the date will be loaded first
+    async asyncData({
+      $axios
+    }) { // TODO What is it?
+      try {
+        let response = await $axios.$get("http://localhost:3000/api/products");
+        console.log(response);
+        return {
+          products: response.products
+        };
+      } catch (error) {
+
+      }
+    }
+  };
 
 </script>
 
