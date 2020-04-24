@@ -23,7 +23,7 @@
           <div class="history-box">
             <!-- Product image -->
             <a href="#" class="a-link-normal">
-              <img :src="product.photo" alt="Here should be a Product image" class="img-fluid">
+              <img :src="product.photo" alt="Here should be a Product image" class="img-fluid eBooksimg">
             </a>
             <div class="a-spacing-top-base asin-title">
               <span class="a-text normal">
