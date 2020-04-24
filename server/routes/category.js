@@ -25,11 +25,11 @@ router.post('/categories', async (req, res) => {
 // GET request
 router.get('/categories', async (req, rep) => {
     try {
-        let category = await Category.find();
+        let categories = await Category.find();
 
         rep.json({
             success: true,
-            category: category
+            categories: categories
         });
 
     } catch (error) {

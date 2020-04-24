@@ -28,11 +28,11 @@ router.post('/owners', upload.single("photo"), async (req, res) => {
 // GET request
 router.get('/owners', async (req, rep) => {
     try {
-        let owner = await Owner.find();
+        let owners = await Owner.find();
 
         rep.json({
             success: true,
-            owner: owner
+            owners: owners
         });
 
     } catch (error) {

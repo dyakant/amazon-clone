@@ -11,16 +11,15 @@
               <div class="a-spacing-top-medium">
                 <label>Category</label>
                 <select class="a-select-option">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
+                  <option v-for="category in categories" :value="category._id" :key="category._id">{{ category.type }}
+                  </option>
                 </select>
               </div>
               <!-- Owner Dropdown -->
               <div class="a-spacing-top-medium">
                 <label>Owner</label>
                 <select class="a-select-option">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
+                  <option v-for="owner in owners" :value="owner._id" :key="owner._id">{{ owner.name }}</option>
                 </select>
               </div>
             </div>
@@ -53,7 +52,7 @@
             </div>
 
             <!-- Add button -->
-            <hr/>
+            <hr />
             <div class="a-spacing-top-large">
               <span class="a-button-register">
                 <span class="a-button-inner">
@@ -67,14 +66,28 @@
       </div>
     </div>
   </main>
-
 </template>
 
 <script>
   export default {
+    async asyncData({
+      $axios
+    }) { // TODO: What is it?
+      try {
+        let categories = $axios.$get("http://localhost:3000/api/categories"); // TODO: switch with dotenv
+        let owners = $axios.$get("http://localhost:3000/api/owners");
 
+        const [catResponse, ownerResponse] = await Promise.all([categories, owners]);
+
+        return {
+          categories: catResponse.categories,
+          owners: ownerResponse.owners
+        };
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
-
 </script>
 
 <style>
