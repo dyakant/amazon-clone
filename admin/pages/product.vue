@@ -10,16 +10,23 @@
               <!-- Category Dropdown -->
               <div class="a-spacing-top-medium">
                 <label>Category</label>
-                <select class="a-select-option">
-                  <option v-for="category in categories" :value="category._id" :key="category._id">{{ category.type }}
-                  </option>
+                <select class="a-select-option" v-model="categoryID">
+                  <option
+                    v-for="category in categories"
+                    :value="category._id"
+                    :key="category._id"
+                  >{{ category.type }}</option>
                 </select>
               </div>
               <!-- Owner Dropdown -->
               <div class="a-spacing-top-medium">
                 <label>Owner</label>
                 <select class="a-select-option">
-                  <option v-for="owner in owners" :value="owner._id" :key="owner._id">{{ owner.name }}</option>
+                  <option
+                    v-for="owner in owners"
+                    :value="owner._id"
+                    :key="owner._id"
+                  >{{ owner.name }}</option>
                 </select>
               </div>
             </div>
@@ -46,7 +53,6 @@
                   <i class="fal fa-plus"></i>
                   <input type="file" />
                   <p style="margin-top: -70px">Photo</p>
-
                 </label>
               </div>
             </div>
@@ -69,27 +75,28 @@
 </template>
 
 <script>
-  export default {
-    async asyncData({
-      $axios
-    }) { // TODO: What is it?
-      try {
-        let categories = $axios.$get("http://localhost:3000/api/categories"); // TODO: switch with dotenv
-        let owners = $axios.$get("http://localhost:3000/api/owners");
+export default {
+  // TODO: What is it?
+  async asyncData({ $axios }) {
+    try {
+      let categories = $axios.$get("http://localhost:3000/api/categories"); // TODO: switch with dotenv
+      let owners = $axios.$get("http://localhost:3000/api/owners");
 
-        const [catResponse, ownerResponse] = await Promise.all([categories, owners]);
+      const [catResponse, ownerResponse] = await Promise.all([
+        categories,
+        owners
+      ]);
 
-        return {
-          categories: catResponse.categories,
-          owners: ownerResponse.owners
-        };
-      } catch (error) {
-        console.log(error);
-      }
+      return {
+        categories: catResponse.categories,
+        owners: ownerResponse.owners
+      };
+    } catch (error) {
+      console.log(error);
     }
   }
+};
 </script>
 
 <style>
-
 </style>

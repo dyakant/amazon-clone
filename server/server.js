@@ -10,37 +10,43 @@ dotenv.config();
 
 const app = express();
 
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect(
+  process.env.DATABASE,
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, err => {
+  },
+  err => {
     if (err) {
-        console.log(err);
+      console.log(err);
     } else {
-        console.log("Connected to the database")
+      console.log("Connected to the database");
     }
-})
+  }
+);
 
 // Middlewares
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+app.use(
+  bodyParser.urlencoded({
     extended: false
-}));
+  })
+);
 
 // require routes
-const productRoutes = require('./routes/product');
-const categoryRoutes = require('./routes/category');
-const ownerRoutes = require('./routes/owner');
+const productRoutes = require("./routes/product");
+const categoryRoutes = require("./routes/category");
+const ownerRoutes = require("./routes/owner");
 
-app.use('/api', productRoutes);
-app.use('/api', categoryRoutes);
-app.use('/api', ownerRoutes);
+app.use("/api", productRoutes);
+app.use("/api", categoryRoutes);
+app.use("/api", ownerRoutes);
 
-app.listen(3000, (err) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("Listening on port 3000");
-    }
+app.listen(3000, err => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Listening on port 3000");
+  }
 });
