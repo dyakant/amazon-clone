@@ -5,7 +5,6 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
           <form>
-            <div class="a-spacing-large" />
             <h2 style="text-align-center">Add new product</h2>
             <div class="a-selection">
               <!-- Category Dropdown -->
@@ -75,7 +74,6 @@
                   <span class="a-button-text" @click="onAddProduct">Add product</span>
                 </span>
               </span>
-              <a href="/#" class="a-button-history margin-left-10">back to main</a>
             </div>
           </form>
         </div>
