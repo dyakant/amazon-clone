@@ -7,8 +7,8 @@
           <h1 class="a-size-large a-spacing-none a-text-normal">All products</h1>
           <div class="a-spacing-large" />
           <a href="/product" class="a-button-buy-again">Add new product</a>
-          <a href="#" class="a-button-history margin-left-10">Add new category</a>
-          <a href="#" class="a-button-history margin-left-10">Add new owner</a>
+          <a href="/category" class="a-button-history margin-left-10">Add new category</a>
+          <a href="/owner" class="a-button-history margin-left-10">Add new owner</a>
         </div>
       </div>
     </div>

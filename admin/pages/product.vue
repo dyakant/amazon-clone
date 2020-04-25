@@ -128,7 +128,7 @@ export default {
       this.selectedFile = event.target.files[0];
       this.fileName = event.target.files[0].name;
     },
-    onAddProduct() {
+    async onAddProduct() {
       let data = new FormData();
       data.append("categoryId", this.categoryId);
       data.append("ownerId", this.ownerId);
@@ -138,7 +138,7 @@ export default {
       data.append("stockQuantity", this.stockQuantity);
       data.append("photo", this.selectedFile, this.fileName);
 
-      let result = this.$axios.$post(
+      let result = await this.$axios.$post(
         "http://localhost:3000/api/products",
         data
       );

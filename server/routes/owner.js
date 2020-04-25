@@ -9,7 +9,7 @@ router.post("/owners", upload.single("photo"), async (req, res) => {
 
     owner.name = req.body.name;
     owner.about = req.body.about;
-    owner.photo = req.file.location;
+    owner.photo = req.file? req.file.location: null;
 
     await owner.save();
 
