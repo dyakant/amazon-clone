@@ -92,14 +92,16 @@ export default {
     try {
       let categories = $axios.$get("http://localhost:3000/api/categories"); // TODO: switch with dotenv
       let owners = $axios.$get("http://localhost:3000/api/owners");
-      let product = $axios.$get(`http://localhost:3000/api/products/${params.id}`);
+      let product = $axios.$get(
+        `http://localhost:3000/api/products/${params.id}`
+      );
 
       const [catResponse, ownerResponse, productResponse] = await Promise.all([
         categories,
         owners,
         product
       ]);
-        console.log(productResponse.product);
+      console.log(productResponse.product);
       return {
         categories: catResponse.categories,
         owners: ownerResponse.owners,
@@ -109,7 +111,7 @@ export default {
         stockQuantity: productResponse.product.stockQuantity,
         description: productResponse.product.description,
         categoryId: productResponse.product.category,
-        ownerId: productResponse.product.owner,
+        ownerId: productResponse.product.owner
       };
     } catch (error) {
       console.log(error);
@@ -121,12 +123,6 @@ export default {
   },
   data() {
     return {
-    //   categoryId: null,
-    //   ownerId: null,
-    //   title: "",
-    //   price: 0,
-    //   description: "",
-    //   stockQuantity: 1,
       selectedFile: null,
       fileName: ""
     };

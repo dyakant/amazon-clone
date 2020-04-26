@@ -6,9 +6,9 @@
         <div class="col-sm-8 col-8">
           <h1 class="a-size-large a-spacing-none a-text-normal">All products</h1>
           <div class="a-spacing-large" />
-          <a href="/products" class="a-button-buy-again">Add new product</a>
-          <a href="/category" class="a-button-history margin-left-10">Add new category</a>
-          <a href="/owner" class="a-button-history margin-left-10">Add new owner</a>
+          <nuxt-link to="/products" class="a-button-buy-again">Add new product</nuxt-link>
+          <nuxt-link to="/category" class="a-button-history margin-left-10">Add new category</nuxt-link>
+          <nuxt-link to="/owner" class="a-button-history margin-left-10">Add new owner</nuxt-link>
         </div>
       </div>
     </div>
@@ -54,8 +54,15 @@
             </div>
             <!-- Product buttons -->
             <div class="a-row">
-              <a href="#" class="a-button-history margin-left-10">Update</a>
-              <a href="#" class="a-button-history margin-left-10">Delete</a>
+              <nuxt-link
+                :to="`/products/${product._id}`"
+                class="a-button-history margin-left-10"
+              >Update</nuxt-link>
+              <a
+                to="#"
+                class="a-button-history margin-left-10"
+                @click="onDeleteButton(product._id, index)"
+              >Delete</a>
             </div>
           </div>
         </div>
@@ -72,12 +79,26 @@ export default {
   async asyncData({ $axios }) {
     try {
       let response = await $axios.$get("http://localhost:3000/api/products");
-      console.log("Products have been loaded;");
+      // console.log("Products have been loaded;");
       return {
         products: response.products
       };
     } catch (error) {
       console.log(error);
+    }
+  },
+  methods: {
+    async onDeleteButton(productId, index) {
+      try {
+        let response = await this.$axios.$delete(
+          `http://localhost:3000/api/products/${productId}`
+        );
+        if (response.success) {
+          this.products.splice(index, 1);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

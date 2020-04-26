@@ -75,7 +75,7 @@
                   <span class="a-button-text" @click="onAddProduct">Add product</span>
                 </span>
               </span>
-              <a href="/#" class="a-button-history margin-left-10">back to main</a>
+              <nuxt-link to="/#" class="a-button-history margin-left-10">back to main</nuxt-link>
             </div>
           </form>
         </div>
