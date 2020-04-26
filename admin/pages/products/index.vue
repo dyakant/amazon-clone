@@ -11,7 +11,7 @@
               <!-- Category Dropdown -->
               <div class="a-spacing-top-medium">
                 <label>Category</label>
-                <select class="a-select-option" v-model="categoryID">
+                <select class="a-select-option" v-model="categoryId">
                   <option
                     v-for="category in categories"
                     :value="category._id"
@@ -22,7 +22,7 @@
               <!-- Owner Dropdown -->
               <div class="a-spacing-top-medium">
                 <label>Owner</label>
-                <select class="a-select-option" v-model="ownerID">
+                <select class="a-select-option" v-model="ownerId">
                   <option
                     v-for="owner in owners"
                     :value="owner._id"
@@ -112,8 +112,8 @@ export default {
   },
   data() {
     return {
-      categoryID: null,
-      ownerID: null,
+      categoryId: null,
+      ownerId: null,
       title: "",
       price: 0,
       description: "",
